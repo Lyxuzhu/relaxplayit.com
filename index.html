@@ -3,45 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Center - Relax & Play</title>
+    <title>relaxplayit.com - Relax & Play</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="firstyouxi/styles.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #6e8efb 0%, #a777e3 100%) !important;
+            font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+        }
+        .glass {
+            background: rgba(255,255,255,0.15);
+            box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            border: 1.5px solid rgba(255,255,255,0.18);
+        }
+        .banner {
+            background: linear-gradient(90deg,rgba(110,142,251,0.7),rgba(167,119,227,0.7));
+            box-shadow: 0 4px 32px 0 rgba(110,142,251,0.18);
+            border-radius: 24px;
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: -40px; left: -40px;
+            width: 120px; height: 120px;
+            background: rgba(255,255,255,0.18);
+            border-radius: 50%;
+            filter: blur(16px);
+        }
+        .banner h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 24px #a777e3;
+        }
+        .banner .slogan {
+            font-size: 1.25rem;
+            color: #e0e7ff;
+            margin-top: 0.5rem;
+            text-shadow: 0 1px 8px #6e8efb;
+            font-weight: 500;
+        }
+        .game-card {
+            cursor: pointer;
+            border-radius: 18px;
+            background: rgba(30,41,59,0.55);
+            box-shadow: 0 2px 16px 0 rgba(110,142,251,0.10);
+            transition: transform 0.2s, box-shadow 0.2s, border 0.2s;
+            border: 1.5px solid rgba(167,119,227,0.12);
+        }
+        .game-card:hover, .game-card.active-game {
+            transform: scale(1.06) translateY(-4px);
+            box-shadow: 0 8px 32px 0 rgba(110,142,251,0.22);
+            border: 2.5px solid #a777e3;
+            background: rgba(110,142,251,0.18);
+        }
+        .game-card h2 {
+            color: #a777e3;
+            font-weight: 700;
+        }
+        .game-card p {
+            color: #e0e7ff;
+        }
+        .glass-iframe {
+            border-radius: 24px;
+            box-shadow: 0 8px 32px 0 rgba(110,142,251,0.18);
+            background: rgba(255,255,255,0.10);
+            border: 1.5px solid rgba(255,255,255,0.18);
+            overflow: hidden;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            position: relative;
+        }
+        .glass-iframe::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            pointer-events: none;
+            box-shadow: 0 0 32px 8px rgba(110,142,251,0.12) inset;
+        }
+        @media (max-width: 768px) {
+            .banner h1 { font-size: 1.5rem; }
+            .banner { padding: 1.2rem 0.5rem 1rem 0.5rem; }
+            .glass-iframe { border-radius: 12px; }
+        }
+    </style>
 </head>
-<body class="min-h-screen">
-    <!-- Header with Domain -->
-    <header class="bg-transparent p-4 shadow-lg text-center">
-        <h1 class="text-3xl font-bold text-white">relaxplayit.com</h1>
+<body>
+    <!-- 科技感横幅 -->
+    <header class="banner glass text-center">
+        <h1>relaxplayit.com</h1>
+        <div class="slogan">Play with yourself &nbsp; Relax and powerful</div>
     </header>
 
-    <!-- Game Selection: 3 equal columns, centered text, beautiful hover -->
+    <!-- 游戏选择卡片 -->
     <div class="container mx-auto p-4 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="game-card flex flex-col items-center justify-center bg-gray-800 bg-opacity-60 rounded-lg py-10 px-4 text-center transition-transform duration-200 hover:scale-105 hover:shadow-2xl cursor-pointer" onclick="showGame('2048')">
-            <h2 class="text-2xl font-bold mb-2 text-blue-400">2048</h2>
-            <p class="text-gray-200 text-lg">A relaxing number puzzle game. Combine tiles to reach 2048!</p>
+        <div class="game-card flex flex-col items-center justify-center py-10 px-4 text-center" onclick="showGame('2048', event)">
+            <h2 class="text-2xl font-bold mb-2">2048</h2>
+            <p class="text-lg">A relaxing number puzzle game. Combine tiles to reach 2048!</p>
         </div>
-        <div class="game-card flex flex-col items-center justify-center bg-gray-800 bg-opacity-60 rounded-lg py-10 px-4 text-center transition-transform duration-200 hover:scale-105 hover:shadow-2xl cursor-pointer" onclick="showGame('tetris')">
-            <h2 class="text-2xl font-bold mb-2 text-blue-400">Tetris</h2>
-            <p class="text-gray-200 text-lg">Classic block-stacking fun. Perfect for stress relief!</p>
+        <div class="game-card flex flex-col items-center justify-center py-10 px-4 text-center" onclick="showGame('hextris', event)">
+            <h2 class="text-2xl font-bold mb-2">Hextris</h2>
+            <p class="text-lg">Fast-paced puzzle game. Stack hexagons and clear lines!</p>
         </div>
-        <div class="game-card flex flex-col items-center justify-center bg-gray-800 bg-opacity-60 rounded-lg py-10 px-4 text-center transition-transform duration-200 hover:scale-105 hover:shadow-2xl cursor-pointer" onclick="showGame('snake')">
-            <h2 class="text-2xl font-bold mb-2 text-blue-400">Snake</h2>
-            <p class="text-gray-200 text-lg">A casual journey of growth. Simple yet addictive!</p>
+        <div class="game-card flex flex-col items-center justify-center py-10 px-4 text-center" onclick="showGame('minesweeper', event)">
+            <h2 class="text-2xl font-bold mb-2">Minesweeper</h2>
+            <p class="text-lg">Classic logic puzzle. Find all the mines without detonating!</p>
         </div>
     </div>
 
-    <!-- Main Content Area -->
+    <!-- 主内容区 -->
     <main class="container mx-auto p-4">
-        <!-- Game Info -->
-        <div id="game-info" class="mb-4 p-6 bg-gray-800 bg-opacity-50 backdrop-blur-sm rounded-lg">
+        <!-- 游戏信息 -->
+        <div id="game-info" class="mb-4 p-6 glass rounded-lg">
             <h2 class="text-2xl font-bold mb-3 text-blue-400">Welcome to Your Relaxation Zone!</h2>
-            <p class="text-gray-300 text-lg">Take a break from your busy day and enjoy some casual gaming. Our collection of classic games is perfect for quick relaxation and stress relief. No pressure, just pure entertainment!</p>
+            <p class="text-lg">Take a break from your busy day and enjoy some casual gaming. Our collection of classic games is perfect for quick relaxation and stress relief. No pressure, just pure entertainment!</p>
         </div>
-
-        <!-- Game Container: responsive 16:9 aspect ratio, always centered, large -->
-        <div class="game-container bg-gray-800 bg-opacity-50 backdrop-blur-sm rounded-lg p-4 flex justify-center items-center">
+        <!-- 玻璃拟态游戏区 -->
+        <div class="game-container glass-iframe p-4 flex justify-center items-center">
             <div class="aspect-w-16 aspect-h-9 w-full max-w-5xl">
                 <iframe id="game-frame" 
-                        src="https://play2048.co/" 
+                        src="https://gabrielecirulli.github.io/2048/" 
                         class="w-full h-full border-0 rounded shadow-xl"
                         allowfullscreen>
                 </iframe>
@@ -49,6 +139,53 @@
         </div>
     </main>
 
-    <script src="scripts.js"></script>
+    <script>
+    // 游戏配置（可自由嵌入的开源游戏）
+    const games = {
+        '2048': {
+            url: 'https://gabrielecirulli.github.io/2048/',
+            title: '2048',
+            description: 'A relaxing number puzzle game where you combine tiles to reach 2048. Perfect for a quick mental break!'
+        },
+        'hextris': {
+            url: 'https://hextris.github.io/hextris/',
+            title: 'Hextris',
+            description: 'Fast-paced puzzle game. Stack hexagons and clear lines!'
+        },
+        'minesweeper': {
+            url: 'https://minesweeper.online/',
+            title: 'Minesweeper',
+            description: 'Classic logic puzzle. Find all the mines without detonating!'
+        }
+    };
+    let currentGame = '2048';
+    function showGame(gameId, event) {
+        if (!games[gameId]) return;
+        document.querySelectorAll('.game-card').forEach(card => {
+            card.classList.remove('active-game');
+        });
+        if(event && event.currentTarget) event.currentTarget.classList.add('active-game');
+        const gameInfo = document.getElementById('game-info');
+        gameInfo.querySelector('h2').textContent = games[gameId].title;
+        gameInfo.querySelector('p').textContent = games[gameId].description;
+        const iframe = document.getElementById('game-frame');
+        iframe.classList.add('loading');
+        localStorage.setItem('currentGame', gameId);
+        currentGame = gameId;
+        setTimeout(() => {
+            iframe.src = games[gameId].url;
+            iframe.onload = () => {
+                iframe.classList.remove('loading');
+                iframe.classList.add('loaded');
+            };
+        }, 300);
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedGame = localStorage.getItem('currentGame');
+        if (savedGame && games[savedGame]) {
+            showGame(savedGame);
+        }
+    });
+    </script>
 </body>
 </html> 
