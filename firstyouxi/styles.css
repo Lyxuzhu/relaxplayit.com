@@ -1,0 +1,133 @@
+/* Custom Styles */
+body {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    color: white;
+    min-height: 100vh;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    z-index: -1;
+    transition: background 0.5s ease;
+}
+
+/* Scroll-based background change */
+@media (min-height: 100vh) {
+    body::before {
+        background: linear-gradient(135deg, 
+            #1e3a8a 0%,
+            #3b82f6 50%,
+            #1e3a8a 100%
+        );
+        background-size: 100% 300%;
+        animation: gradientScroll 20s ease infinite;
+    }
+}
+
+@keyframes gradientScroll {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 0% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+/* Aspect Ratio Utility for 16:9 */
+.aspect-w-16.aspect-h-9 {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+}
+.aspect-w-16.aspect-h-9 > * {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+/* Game Card Grid and Hover */
+.game-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(30,58,138,0.08);
+}
+.game-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 32px rgba(59,130,246,0.18);
+    z-index: 2;
+}
+
+/* Remove old min-h and aspect hacks */
+
+.game-container {
+    transition: all 0.3s ease;
+}
+
+.game-container iframe {
+    transition: opacity 0.3s ease;
+}
+
+/* Loading Animation */
+.loading {
+    opacity: 0;
+}
+
+.loaded {
+    opacity: 1;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .aspect-w-16.aspect-h-9 { padding-bottom: 60%; }
+}
+
+/* Active Game State */
+.active-game {
+    background-color: rgba(29, 78, 216, 0.7) !important;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.5);
+}
+
+/* Game Info Animation */
+#game-info {
+    transition: all 0.3s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(31, 41, 55, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(75, 85, 99, 0.8);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(107, 114, 128, 0.9);
+}
+
+/* Header Animation */
+header h1 {
+    transition: all 0.3s ease;
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+header h1:hover {
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+    transform: scale(1.05);
+} 
